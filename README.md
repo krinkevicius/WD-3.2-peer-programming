@@ -40,11 +40,11 @@ npm run generate-types
 
 ### Create table screening
 
-id: numeric primary key
-timestamp: datetime
-total_tickets: numeric, positive
-tickets_left: numeric, positive, <= total_tickets
-movie_id: foreign key for movies.id
+id: numeric primary key <br>
+timestamp: datetime <br>
+total_tickets: numeric, positive <br>
+tickets_left: numeric, positive, <= total_tickets <br>
+movie_id: foreign key for movies.id <br>
 
 ### Write tests for screening endpoint
 
