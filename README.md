@@ -35,3 +35,21 @@ If you make changes to the database schema, you will need to update the types. Y
 ```bash
 npm run generate-types
 ```
+
+## TODO LIST:
+
+### Create table screening
+
+id: numeric primary key
+timestamp: datetime
+total_tickets: numeric, positive
+tickets_left: numeric, positive, <= total_tickets
+movie_id: foreign key for movies.id
+
+### Write tests for screening endpoint
+
+- it should find all screenings where tickets_left > 0;
+
+### Write tests for ticket
+
+- it should get a list of all bookings made;
