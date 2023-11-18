@@ -63,4 +63,8 @@ describe('findAll', () => {
       year: 1999,
     })
   })
+  it('should return an empty array if there are no screenings', async () => {
+    const foundScreenings = await repository.findAll()
+    expect(foundScreenings).toHaveLength(0)
+  })
 })
