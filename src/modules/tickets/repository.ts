@@ -26,5 +26,5 @@ export default (db: Database) => ({
     }
     return null
   },
-  findAll: 1,
+  findAll: () => db.selectFrom(TABLE_NAME).selectAll().execute(),
 })
