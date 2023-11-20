@@ -56,3 +56,24 @@ describe('GET', () => {
     expect(screenings).toHaveLength(0)
   })
 })
+
+describe('POST', () => {
+  it('should add new screening', async () => {
+    const newScreening = {
+      timestamp: '2020-01-01T00:00:00Z',
+      totalTickets: 250,
+      movieId: 133093,
+    }
+    const { body } = await supertest(app)
+      .post('/screenings')
+      .send(newScreening)
+      .expect(201)
+    expect(body).toEqual({
+      id: expect.any(Number),
+      movieId: 133093,
+      ticketsLeft: null,
+      timestamp: '2020-01-01T00:00:00Z',
+      totalTickets: 250,
+    })
+  })
+})
