@@ -9,6 +9,7 @@ export async function up(db: Kysely<SqliteDatabase>) {
     .addColumn('screening_id', 'integer', (c) =>
       c.notNull().references('screenings.id')
     )
+    .execute()
 }
 
 export async function down(db: Kysely<SqliteDatabase>) {
