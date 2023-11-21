@@ -60,3 +60,40 @@ describe('GET', () => {
     expect(body).toHaveLength(0)
   })
 })
+
+describe('POST', () => {
+  it('should add new ticket', async () => {
+    const newTicket = {
+      id: 1,
+      ticketNumber: 4,
+      screeningId: 1,
+    }
+    const { body } = await supertest(app)
+      .post('/tickets')
+      .send(newTicket)
+      .expect(201)
+    expect(body).toEqual({
+      id: expect.any(Number),
+      ticketNumber: 4,
+      screeningId: 1,
+    })
+  })
+  it('should return 400 if there is not enough tickets', async () => {
+    await db
+      .updateTable('screenings')
+      .set({ ticketsLeft: 1 })
+      .where('id', '=', 2)
+      .execute()
+
+    const newTicket = {
+      id: 1,
+      ticketNumber: 4,
+      screeningId: 2,
+    }
+    const { body } = await supertest(app)
+      .post('/tickets')
+      .send(newTicket)
+      .expect(400)
+    expect(body.error.message).toEqual('Not enough tickets!')
+  })
+})
